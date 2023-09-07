@@ -1,0 +1,23 @@
+.popup__error_visible {
+    color: #ff0000;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14.5px;
+    margin: 0 auto 0 22px;
+    padding: 0;
+    position: absolute;
+    top: 30px;
+}
+@media screen and (min-width: 768px) {
+    .popup__error_visible {
+        margin: 5px auto 0 35px;
+    }
+}
+
+.popup__error_visible:nth-child(2) {
+    top: 26px;
+}
+
+.popup__error_visible:nth-child(4) {
+    top: 90px;
+}

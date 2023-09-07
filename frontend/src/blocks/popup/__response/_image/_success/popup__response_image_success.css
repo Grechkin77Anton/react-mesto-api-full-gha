@@ -1,0 +1,7 @@
+.popup__response_image_success {
+    background-image: url(./../../../../../images/succesfull.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 120px;
+    margin: 60px auto 40px;
+}

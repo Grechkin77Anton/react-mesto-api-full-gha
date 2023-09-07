@@ -1,0 +1,7 @@
+.popup__response_success {
+    background-color: #FFFFFF;
+    position: relative;
+    width: 430px;
+    height: 330px;
+    border-radius: 10px;
+}

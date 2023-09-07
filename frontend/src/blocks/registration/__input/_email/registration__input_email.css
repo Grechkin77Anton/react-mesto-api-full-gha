@@ -1,0 +1,9 @@
+.registration__input_email {
+    width: 358px;
+    background-color: initial;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 0 0 13px;
+    color: #ccc;
+    outline: none;
+}

@@ -20,7 +20,7 @@ module.exports.addCard = (req, res, next) => {
 };
 
 module.exports.getCards = (req, res, next) => {
-  Card.find({})
+  Card.find({}).sort({ createAt: -1 })
     .then((cards) => res.send(cards))
     .catch(next);
 };
@@ -57,16 +57,13 @@ module.exports.deleteCard = (req, res, next) => {
 
 module.exports.likeCard = (req, res, next) => {
   Card.findByIdAndUpdate(req.params.cardId, { $addToSet: { likes: req.user._id } }, { new: true })
-    .populate('owner')
-    .orFail()
+    .orFail(new NotFoundError('Карточка по указанному _id не найдена'))
     .then((card) => {
-      res.send(card);
+      res.status(200).send(card);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
         next(new BadRequestError('Некорректный id карточки'));
-      } else if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        next(new NotFoundError('Карточка по указанному _id не найдена'));
       } else {
         next(err);
       }
@@ -75,16 +72,13 @@ module.exports.likeCard = (req, res, next) => {
 
 module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, { new: true })
-    .populate('owner')
-    .orFail()
+    .orFail(new NotFoundError('Карточка по указанному _id не найдена'))
     .then((card) => {
       res.send(card);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
         next(new BadRequestError('Некорректный id карточки'));
-      } else if (err instanceof mongoose.Error.DocumentNotFoundError) {
-        next(new NotFoundError('Карточка по указанному _id не найдена'));
       } else {
         next(err);
       }

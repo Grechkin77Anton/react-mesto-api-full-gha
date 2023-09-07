@@ -1,0 +1,12 @@
+.registration__submit {
+    margin-top: 216px;
+    width: 358px;
+    height: 50px;
+    font-size: 18px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+.registration__submit:hover {
+    opacity: .7;
+}
