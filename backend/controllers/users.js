@@ -6,6 +6,8 @@ const BadRequestError = require('../errors/badRequest');
 const NotFoundError = require('../errors/notFoundErr');
 const ConflictError = require('../errors/conflictError');
 
+const { SECRET_KEY = 'mesto' } = process.env;
+
 module.exports.createUser = (req, res, next) => {
   const {
     name, about, avatar, email, password,
@@ -85,7 +87,11 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
+      const token = jwt.sign(
+        { _id: user._id },
+        SECRET_KEY,
+        { expiresIn: '7d' },
+      );
       res.send({ token });
     })
     .catch((err) => {

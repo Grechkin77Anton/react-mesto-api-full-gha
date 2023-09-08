@@ -1,9 +1,10 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const express = require('express');
 const { errors } = require('celebrate');
 const cors = require('cors');
 const helmet = require('helmet');
-// const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 const { errorHandler } = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -12,12 +13,10 @@ const app = express();
 
 app.use(cors());
 
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000, // за 15 минут
-//   max: 100, // можно совершить максимум 100 запросов с одного IP
-// });
-
-// app.use(limiter);
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // за 15 минут
+  max: 100, // можно совершить максимум 100 запросов с одного IP
+});
 
 app.use(helmet());
 
@@ -30,6 +29,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 });
 
 app.use(requestLogger);
+
+app.use(limiter);
 
 app.use('/', require('./routes/index'));
 
