@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'http://api.mesto.grechkin.nomoredomainsicu.ru'
 
 function getResponse(res) {
     return res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusCode}`)
