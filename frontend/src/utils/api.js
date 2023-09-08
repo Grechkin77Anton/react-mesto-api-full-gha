@@ -105,7 +105,7 @@ class Api {
 
 const api = new Api({
     // baseUrl: 'http://localhost:3000',
-    baseUrl: 'http://api.mesto.grechkin.nomoredomainsicu.ru',
+    baseUrl: 'https://api.mesto.grechkin.nomoredomainsicu.ru',
   });
 
   export default api; 

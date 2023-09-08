@@ -1,4 +1,4 @@
-const baseUrl = 'http://api.mesto.grechkin.nomoredomainsicu.ru'
+const baseUrl = 'https://api.mesto.grechkin.nomoredomainsicu.ru'
 
 function getResponse(res) {
     return res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusCode}`)
